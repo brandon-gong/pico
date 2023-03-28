@@ -113,6 +113,7 @@ function App() {
           // dialog from popping up because it's annoying and people tend to hit
           // ctrl-S instinctively
           ev.preventDefault();
+          modifyRunning(false);
         } else if (ev.key === "r") {
           ev.preventDefault();
           //if (ev.repeat) return;
