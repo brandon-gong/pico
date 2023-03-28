@@ -48,6 +48,65 @@ basic division and multiplication, but any logic in JavaScript is
 possible; can you think about how to draw a circle? How about a
 checkerboard? Go try it out [here](https://www.brandongong.org/pico/)!
 
+## More examples
+Try copying the accompanying snippets into the Pico editor and
+playing around with them. How do your changes make the resulting
+image different?
+
+### Checkerboard
+<p align="center">
+  <img width="200" src="./assets/checkerboard.png">
+</p>
+
+```javascript
+function color(x, y) {
+  let column = floor(y / height * 8);
+  let row = floor(x / width * 8);
+
+  if ((column + row) % 2 == 0) return [238, 238, 210];
+  else return [118, 150, 86];
+}
+```
+
+### Metaballs
+<p align="center">
+  <img width="200" src="./assets/metaball.gif">
+</p>
+
+```javascript
+let sqrt = (x) => pow(x, 0.5);
+let sq = (x) => pow(x, 2);
+
+function invHypot(a, b) {
+  return 1 / sqrt(sq(a[0] - b[0]) + sq(a[1] - b[1]));
+}
+
+function normalize(a) {
+  return [a[0] / width, a[1] / height];
+}
+
+function smoothstep(edge0, edge1, x) {
+   if (x < edge0) return 0;
+   else if (x >= edge1) return 1;
+
+   x = (x - edge0) / (edge1 - edge0);
+   return x * x * (3 - 2 * x);
+}
+
+function color(x, y, f, mouseX, mouseY) {
+  let mb1 = [0.5, 0.5];
+  let mb2 = normalize([mouseX, mouseY]);
+  let pos = normalize([x, y]);
+
+  let mbTotal = invHypot(pos, mb1) + invHypot(pos, mb2);
+  mbTotal = smoothstep(9.9, 10, mbTotal);
+  mbTotal *= 255;
+
+  return [mbTotal, mbTotal, mbTotal];
+}
+```
+
+
 ## How does it compare to other graphics libraries?
 Pico is a toy. It (by design) lacks incredibly useful drawing
 functions for cicles, lines, triangles, text, etc. that any other
@@ -117,4 +176,4 @@ make it much more usable to see red squigglies in the code.
 - Saving files. Currently users can only save one file, and its
 stored in `localStorage`, which is by no means a reliable place to
 put things. But I'm not quite sure how to implement this without
-implementing user logins, which I am not that interested in doing. Contributions are welcome!
+implementing user logins, which I am not that interested in doing. Contributions are welcome
