@@ -42,7 +42,7 @@ function naiveRun(
 	// allowable math functions from the builtin Math library, hides the Math
 	// library, configures presets for the settings, and then returns everything
 	// that we need from the user's code in one neat little dict.
-	let u: Interpreted = Function(`
+	let f = Function(`
 		let sin = Math.sin;
 		let cos = Math.cos;
 		let tan = Math.tan;
@@ -81,7 +81,9 @@ function naiveRun(
 			loop: loop,
 			color: color
 		}
-	`)();
+	`);
+
+	let u: Interpreted = f();
 
 	// This canvas is guaranteed to exist; see CanvasContainer for what this is
 	let canvas = document.getElementById("drawing-area")! as HTMLCanvasElement;
@@ -131,7 +133,7 @@ function naiveRun(
 		// copy it into the imagedata array
 		for(let y = 0; y < u.height; y++) {
 			for(let x = 0; x < u.width; x++) {
-				let color = u.color(x, y, frameNumber, mouseX, mouseY, mouseDown);
+				let color = f().color(x, y, frameNumber, mouseX, mouseY, mouseDown);
 				color = color.map(fix_range);
 				data[y * (u.width * 4) + x * 4 + 0] = color[0];
 				data[y * (u.width * 4) + x * 4 + 1] = color[1];
