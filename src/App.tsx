@@ -108,12 +108,12 @@ function App() {
   useEffect(() => {
     document.addEventListener("keydown", (ev: KeyboardEvent) => {
       if (ev.ctrlKey || ev.metaKey) {
-        if (ev.key == "s") {
+        if (ev.key === "s") {
           // ctrl-S doesn't do anything (for now) - we just prevent the default
           // dialog from popping up because it's annoying and people tend to hit
           // ctrl-S instinctively
           ev.preventDefault();
-        } else if (ev.key == "r") {
+        } else if (ev.key === "r") {
           ev.preventDefault();
           //if (ev.repeat) return;
           modifyRunning(true);

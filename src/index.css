@@ -84,3 +84,15 @@ canvas {
   min-width: 80%;
   image-rendering: pixelated;
 }
+
+@media only screen and (max-width: 1000px) {
+  .split {
+    flex-direction: column;
+  }
+  #root {
+    overflow: auto;
+  }
+  .grip {
+    color: transparent;
+  }
+}
