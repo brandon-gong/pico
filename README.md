@@ -6,7 +6,7 @@ Pico is an environment for creating generative, procedural art
 with JavaScript, given incredibly little to work with.
 
 Go play around with it [here](https://www.brandongong.org/pico/)! Or,
-peruse some examples of what can be achieved with it on my ~~blog~~ (coming soon).
+peruse some examples of what can be achieved with it on my [blog](https://www.brandongong.org/2023/03/28/welcome-to-pico/).
 
 ## What is it?
 Images, at least in the digital sense, are essentially 2D arrays of

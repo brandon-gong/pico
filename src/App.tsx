@@ -94,7 +94,7 @@ function App() {
     // if the data from localStorage is null or empty, we fill it in with the
     // default template and update localStorage as well
     if(!stored) {
-      let defaultCode = `function color(x, y) {\n  return [x / width * 255, y / height * 255, 255];\n}`;
+      let defaultCode = `// To get started, check out the tutorial at\n// https://www.brandongong.org/2023/03/28/welcome-to-pico/\nfunction color(x, y) {\n  return [x / width * 255, y / height * 255, 255];\n}\n`;
       stored = defaultCode;
       localStorage.setItem("saved-pico", stored);
     }

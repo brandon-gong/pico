@@ -21,8 +21,7 @@ function NavBar({isRunning, setRunning}: NavBarProps) {
 	return (
 		<nav>
 			<a href="#" className="left"><img src={logo} /></a>
-			{/* TODO need to fix this href link once i've got the help page / tutorial together */}
-			<a href="https://www.brandongong.org/blog/" className='right'><img src={help}/></a>
+			<a href="https://www.brandongong.org/2023/03/28/welcome-to-pico/" className='right'><img src={help}/></a>
 			<a onClick={() => setRunning(false)} className='right'><img src={!isRunning ? stopActive : stop}/></a>
 			<a onClick={() => setRunning(true)} className='right'><img src={isRunning ? runActive : run}/></a>
 		</nav>
