@@ -27,9 +27,9 @@ function color(x, y) {
   return [255, 0, 0];
 }
 ```
-<p align="center">
-  <img width="200" src="./assets/red.png">
-</p>
+
+![checkerboard](./assets/red.png)
+
 
 We can already start get a bit more complexity by varying the 
 pixel color relative to its x-position in the image:
@@ -39,9 +39,8 @@ function color(x, y) {
   return [255, x / width * 255, 0];
 }
 ```
-<p align="center">
-  <img width="200" src="./assets/gradient.png">
-</p>
+
+![checkerboard](./assets/gradient.png)
 
 You can already start imagining the possibilities; I am only doing
 basic division and multiplication, but any logic in JavaScript is
@@ -54,9 +53,7 @@ playing around with them. How do your changes make the resulting
 image different?
 
 ### Checkerboard
-<p align="center">
-  <img width="200" src="./assets/checkerboard.png">
-</p>
+![checkerboard](./assets/checkerboard.png)
 
 ```javascript
 function color(x, y) {
@@ -69,9 +66,7 @@ function color(x, y) {
 ```
 
 ### Metaballs
-<p align="center">
-  <img width="200" src="./assets/metaball.gif">
-</p>
+![Metaballs](./assets/metaball.gif)
 
 ```javascript
 let sqrt = (x) => pow(x, 0.5);
@@ -107,9 +102,7 @@ function color(x, y, f, mouseX, mouseY) {
 ```
 
 ### Mandelbrot
-<p align="center">
-  <img width="200" src="./assets/mandelbrot.png">
-</p>
+![Mandelbrot](./assets/mandelbrot.png)
 
 ```javascript
 loop = false;
@@ -179,7 +172,7 @@ function color(x, y) {
 
 ## How does it compare to other graphics libraries?
 Pico is a toy. It (by design) lacks incredibly useful drawing
-functions for cicles, lines, triangles, text, etc. that any other
+functions for circles, lines, triangles, text, etc. that any other
 reasonable graphics library would have (e.g. Processing, 
 OpenFrameworks).
 
