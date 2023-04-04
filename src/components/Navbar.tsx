@@ -1,9 +1,9 @@
-import logo from '../pico.png';
-import stop from '../stop.png';
-import stopActive from '../stop-active.png';
-import run from '../run.png';
-import runActive from '../run-active.png';
-import help from '../help.png';
+import logo from '../assets/pico.png';
+import stop from '../assets/stop.png';
+import stopActive from '../assets/stop-active.png';
+import run from '../assets/run.png';
+import runActive from '../assets/run-active.png';
+import help from '../assets/help.png';
 
 interface NavBarProps {
 	isRunning: boolean;
