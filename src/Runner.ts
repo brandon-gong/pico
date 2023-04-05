@@ -58,6 +58,8 @@ function naiveRun(
 		let pow = __internal_Math.pow;
 		let floor = __internal_Math.floor;
 		let ceil = __internal_Math.ceil;
+		__internal_Math = undefined;
+
 		let width = 800;
 		let height = 800;
 		let loop = true;
