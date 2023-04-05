@@ -17,7 +17,7 @@ import run from './Runner';
  * or not it is currently running, intervals to be cleared, errors, etc.)
  */
 function App() {
-  
+
   // Setting up state variables and callbacks.
 
   // Whether or not the code is currently running. This info is related to the
@@ -90,11 +90,26 @@ function App() {
   // 1. load old code from local store, if it exists
   useEffect(() => {
     let stored = localStorage.getItem("saved-pico");
-  
+
     // if the data from localStorage is null or empty, we fill it in with the
     // default template and update localStorage as well
     if(!stored) {
-      let defaultCode = `// To get started, check out the tutorial at\n// https://www.brandongong.org/2023/03/28/welcome-to-pico/\nfunction color(x, y) {\n  return [x / width * 255, y / height * 255, 255];\n}\n`;
+      let defaultCode =
+`/*
+ * color(x,y) returns a color in the format [r,g,b] for the
+ * pixel at location (x,y) in the image.
+ *
+ * Try playing with the code below to see how the resulting
+ * image changes - feel free to define your own functions,
+ * variables, etc. It's just JavaScript!
+ *
+ * For a more gentle introduction, visit
+ * https://www.brandongong.org/2023/03/28/welcome-to-pico/
+ */
+ function color(x, y) {
+   return [x / width * 255, y / height * 255, 255];
+ }
+`;
       stored = defaultCode;
       localStorage.setItem("saved-pico", stored);
     }

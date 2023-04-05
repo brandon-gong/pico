@@ -1,8 +1,8 @@
 /**
  * The "namespace" that we expect to extract out of the user-written code.
- * The most important value here is the `color` function, which takes in 
+ * The most important value here is the `color` function, which takes in
  * any variety of parameters and returns a 3-tuple of numbers.
- * 
+ *
  * width, height, and loop are settings that may be modified by the user to
  * control the size of the canvas, and whether or not the sketch should be
  * animated (repeatedly redraw the canvas). Setting loop = false could be very
@@ -15,10 +15,8 @@ type Interpreted = {
 	color: any
 };
 
-// We don't want to expose the full power of the Math library to users, so we
-// actually un-define Math at some point. Good to save a reference to it so
-// we can restore it if something goes wrong!
 let __internal_Math = Math;
+
 
 /**
  * The main meat of pico. Takes user code for pixel-by-pixel colors and uses it
@@ -42,39 +40,31 @@ function naiveRun(
 	// allowable math functions from the builtin Math library, hides the Math
 	// library, configures presets for the settings, and then returns everything
 	// that we need from the user's code in one neat little dict.
-	let f = Function(`
-		let sin = Math.sin;
-		let cos = Math.cos;
-		let tan = Math.tan;
-		let asin = Math.asin;
-		let acos = Math.acos;
-		let atan = Math.atan;
-		let atan2 = Math.atan2;
-		let sinh = Math.sinh;
-		let cosh = Math.cosh;
-		let tanh = Math.tanh;
-		let asinh = Math.asinh;
-		let acosh = Math.acosh;
-		let atanh = Math.tanh;
-		let log = Math.log;
-		let pow = Math.pow;
-		let floor = Math.floor;
-		let ceil = Math.ceil;
-
-		// Users aren't supposed to be able to access the full Math
-		// builtins, so we hide it. If you're a user, congrats on
-		// finding this! And yes, this does mean you can still access
-		// your old pals under __internal_Math. But what's the fun in that?
-		let __internal_Math = Math;
-		Math = undefined;
-
+	let f = Function("__internal_Math", `
+		let sin = __internal_Math.sin;
+		let cos = __internal_Math.cos;
+		let tan = __internal_Math.tan;
+		let asin = __internal_Math.asin;
+		let acos = __internal_Math.acos;
+		let atan = __internal_Math.atan;
+		let atan2 = __internal_Math.atan2;
+		let sinh = __internal_Math.sinh;
+		let cosh = __internal_Math.cosh;
+		let tanh = __internal_Math.tanh;
+		let asinh = __internal_Math.asinh;
+		let acosh = __internal_Math.acosh;
+		let atanh = __internal_Math.tanh;
+		let log = __internal_Math.log;
+		let pow = __internal_Math.pow;
+		let floor = __internal_Math.floor;
+		let ceil = __internal_Math.ceil;
 		let width = 800;
 		let height = 800;
 		let loop = true;
-		
+
+
 		${userCode}
 
-		Math = __internal_Math;
 		return {
 			width: width,
 			height: height,
@@ -83,7 +73,7 @@ function naiveRun(
 		}
 	`);
 
-	let u: Interpreted = f();
+	let u: Interpreted = f(__internal_Math);
 
 	// This canvas is guaranteed to exist; see CanvasContainer for what this is
 	let canvas = document.getElementById("drawing-area")! as HTMLCanvasElement;
@@ -112,7 +102,7 @@ function naiveRun(
 		mouseX = e.clientX - bounding.left;
 		mouseY = e.clientY - bounding.top;
 	}
-	
+
 	// Keeps track of the frame number. Also available to the user.
 	let frameNumber: number = 0;
 
@@ -127,13 +117,16 @@ function naiveRun(
 		// This is going to produce unintended effects with detailed or small images;
 		// if the user wants smooth curves, they have to make it happen themselves!
 		ctx.imageSmoothingEnabled = false;
-		
+
 		// iterate through all the pixels; for each coordinate, call the user's
 		// color function (with also the frame number and mouse data provided) and
 		// copy it into the imagedata array
 		for(let y = 0; y < u.height; y++) {
 			for(let x = 0; x < u.width; x++) {
-				let color = f().color(x, y, frameNumber, mouseX, mouseY, mouseDown);
+
+				Math = (undefined as unknown) as Math;
+				let color = f(__internal_Math).color(x, y, frameNumber, mouseX, mouseY, mouseDown);
+				Math = __internal_Math;
 				color = color.map(fix_range);
 				data[y * (u.width * 4) + x * 4 + 0] = color[0];
 				data[y * (u.width * 4) + x * 4 + 1] = color[1];
@@ -143,7 +136,7 @@ function naiveRun(
 		}
 
 		// paint in the image data
-		ctx.putImageData(imageData, 0, 0, 0, 0, u.width, u.height);      
+		ctx.putImageData(imageData, 0, 0, 0, 0, u.width, u.height);
 		frameNumber++;
 	}
 	if (u.loop) {
@@ -154,6 +147,7 @@ function naiveRun(
 			try {
 				run();
 			} catch (e) {
+				Math = __internal_Math;
 				console.log(e);
 				let msg;
 				if (e instanceof Error) msg = e.message;
@@ -175,7 +169,7 @@ function naiveRun(
 /**
  * The main entry point to the Runner module. This function is called by the UI
  * when the user wishes to run their code and see the results on the canvas.
- * 
+ *
  * @param userCode the user's code to run
  * @param setRunning a callback to update the UI to reflect whether the code
  * 	is actively running or not.
@@ -195,6 +189,7 @@ function run(
 		try {
 			intervalId = naiveRun(userCode, setRunning, setError);
 		} catch(e) {
+
 			// The error might have occurred between when we un-defined math and
 			// restored it, so we restore it here to be sure its available
 			Math = __internal_Math;
