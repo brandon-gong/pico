@@ -29,10 +29,31 @@ Click the title to view the corresponding source code for each example sketch.
 ![Mandelbrot](./images/mandelbrot.png)
 
 ## Project structure
-TODO
+
 
 ## Building and running
-TODO
+To run this project locally, you need to have `npm` installed.
+- Clone this repository to your local machine.
+  ```sh
+  git clone https://github.com/brandon-gong/pico.git
+  cd pico
+  ```
+- Install all dependencies for the project.
+  ```sh
+  npm install
+  ```
+- Start the project running. After this, all changes to the source
+  code will be automatically compiled and updated on the page.
+  ```sh
+  npm start
+  ```
+The below note only applies to those who have push access to this
+repository (me only currently).
+- To deploy the project to GitHub pages, the relevant changes have
+  already been made in `package.json`. Simply run
+  ```sh
+  npm run deploy
+  ```
 
 ## Final thoughts
 This project was tossed together in literally one day, so there are
