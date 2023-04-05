@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" src="./assets/logo.png">
+  <img width="400" src="./images/logo.png">
 </p>
 
 *This README provides examples and technical implementation details for Pico.
@@ -13,19 +13,19 @@ value.
 ## Examples
 Click the title to view the corresponding source code for each example sketch.
 
-### Red square
+### [Red square](https://github.com/brandon-gong/pico/blob/main/examples/red_square.js)
 ![red square](./images/red.png)
 
-### Gradient
+### [Gradient](https://github.com/brandon-gong/pico/blob/main/examples/gradient.js)
 ![gradient](./images/gradient.png)
 
-### Checkerboard
+### [Checkerboard](https://github.com/brandon-gong/pico/blob/main/examples/checkerboard.js)
 ![checkerboard](./images/checkerboard.png)
 
-### Metaballs
+### [Metaballs](https://github.com/brandon-gong/pico/blob/main/examples/metaballs.js)
 ![Metaballs](./images/metaball.gif)
 
-### Mandelbrot
+### [Mandelbrot](https://github.com/brandon-gong/pico/blob/main/examples/mandelbrot.js)
 ![Mandelbrot](./images/mandelbrot.png)
 
 ## Project structure
