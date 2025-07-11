@@ -104,7 +104,7 @@ function App() {
  * variables, etc. It's just JavaScript!
  *
  * For a more gentle introduction, visit
- * https://www.brandongong.org/2023/03/28/welcome-to-pico/
+ * https://github.com/brandon-gong/pico/blob/main/tutorial.md
  */
  function color(x, y) {
    return [x / width * 255, y / height * 255, 255];

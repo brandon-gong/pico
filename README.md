@@ -2,8 +2,7 @@
   <img width="400" src="./images/logo.png">
 </p>
 
-*This README provides examples and technical implementation details for Pico.
-For a guided introduction and tutorial, see [this blog post](https://www.brandongong.org/2023/03/28/welcome-to-pico/), or read [the documentation](https://www.brandongong.org/2023/03/28/pico-documentation/).*
+(See the [tutorial](https://github.com/brandon-gong/pico/blob/main/tutorial.md) if you want to get started using Pico!)
 
 Pico is an environment for creating generative, procedural art
 with JavaScript on a very low level. Users provide a function that takes in
